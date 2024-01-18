@@ -3,7 +3,7 @@ from django import template
 
 register = template.Library()
 
-TRASH_WORDS = ['душнила', 'пес']
+TRASH_WORDS = ['душнила', 'псина']
 
 # Регистрируем наш фильтр под именем currency, чтоб Django понимал,
 # что это именно фильтр для шаблонов, а не простая функция.

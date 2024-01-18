@@ -1,8 +1,12 @@
 from datetime import datetime
 
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from .models import Post
+from django.urls import reverse_lazy
+from django.views.generic import (
+    ListView, DetailView, CreateView
+)
+from .models import Post, Author
+from .forms import PostForm
 from .filters import PostFilter
 # Create your views here.
 
@@ -91,3 +95,20 @@ class PostsSearch(ListView):
         context['next_post'] = None
         context['filterset'] = self.filterset
         return context
+
+    # Добавляем новое представление для создания товаров.
+class PostCreate(CreateView):
+    # Указываем нашу разработанную форму
+    form_class = PostForm
+    # модель товаров
+    model = Post
+    # и новый шаблон, в котором используется форма.
+    template_name = 'post_edit.html'
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        if self.request.path == 'posts/news/create':
+            post.categoryType = 'Новость'
+        elif self.request.path == 'posts/articles/create/':
+            post.categoryType = 'Статья'
+        return super().form_valid(form)
