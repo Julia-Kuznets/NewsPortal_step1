@@ -3,10 +3,10 @@ from datetime import datetime
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import (
-    ListView, DetailView, CreateView
+    ListView, DetailView, CreateView, UpdateView
 )
-from .models import Post, Author
-from .forms import PostForm
+from .models import Post
+from .forms import PostForm, PostFormEdit
 from .filters import PostFilter
 # Create your views here.
 
@@ -112,3 +112,10 @@ class PostCreate(CreateView):
         elif self.request.path == 'posts/articles/create/':
             post.categoryType = 'Статья'
         return super().form_valid(form)
+
+class PostUpdate(UpdateView):
+    form_class = PostFormEdit
+    model = Post
+    template_name = 'post_edit.html'
+
+

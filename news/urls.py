@@ -1,7 +1,7 @@
 from django.urls import path
 # Импортируем созданное нами представление
 from .views import (
-    PostsList, PostDetail, PostCreate, PostsSearch
+    PostsList, PostDetail, PostCreate, PostsSearch, PostUpdate
 )
 
 
@@ -19,5 +19,6 @@ urlpatterns = [
    path('search/', PostsSearch.as_view()),
    path('<int:pk>', PostDetail.as_view(), name='post_detail'),
    path('news/create/', PostCreate.as_view(), name='post_create'),
-   path('article/create/', PostCreate.as_view(), name='post_create')
+   path('article/create/', PostCreate.as_view(), name='post_create'),
+   path('<int:pk>/edit/', PostUpdate.as_view(), name='post_edit')
 ]

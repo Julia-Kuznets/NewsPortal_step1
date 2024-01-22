@@ -21,9 +21,11 @@ Posts
    {% if posts %}
        <table>
            <tr>
+               <td>№</td>
                <td>Заголовок</td>
                <td>Дата публикации</td>
                <td>Описание</td>
+               <td>Категория</td>
 
            </tr>
 
@@ -37,9 +39,11 @@ Posts
                 от переменных в Python. Здесь также можно получать доступ к
                 полям объекта модели. Например, здесь мы выводим имя,
                 в следующем столбце описание, и т.д.  -->
+               <td>{{ post.id }}</td>
                <td>{{ post.title }}</td>
                <td>{{ post.dateCreation|date:'d M Y' }}</td>
                <td>{{ post.text|truncatewords:20 }}</td>
+               <td>{{ post.categoryType }}</td>
 
            </tr>
            {% endfor %}
