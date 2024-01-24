@@ -3,10 +3,10 @@ from datetime import datetime
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import (
-    ListView, DetailView, CreateView, UpdateView
+    ListView, DetailView, CreateView, UpdateView, DeleteView
 )
 from .models import Post
-from .forms import PostForm, PostFormEdit
+from .forms import PostForm
 from .filters import PostFilter
 # Create your views here.
 
@@ -114,8 +114,13 @@ class PostCreate(CreateView):
         return super().form_valid(form)
 
 class PostUpdate(UpdateView):
-    form_class = PostFormEdit
+    form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
+
+class PostDelete(DeleteView):
+    model = Post
+    template_name = 'post_delete.html'
+    success_url = reverse_lazy('post_list')
 
 
