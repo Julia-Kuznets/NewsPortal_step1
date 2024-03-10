@@ -17,6 +17,11 @@ Posts
    <h3>{% current_time '%d %b %Y' %}</h3>
    <h3> {{ next_post|default_if_none:"Другие новости будут позже!" }} </h3>
 
+    {% if perms.news.add_post %}
+    <a href="{% url 'post_create' %}">Добавить статью</a>
+    <a href="{% url 'post_create' %}">Добавить новость</a>
+    {% endif %}
+
    <hr>
    {% if posts %}
        <table>
@@ -26,6 +31,9 @@ Posts
                <td>Дата публикации</td>
                <td>Описание</td>
                <td>Категория</td>
+               {% if perms.news.change_post or perms.news.delete_post %}
+                <td>Действия</td>
+               {% endif %}
 
            </tr>
 
@@ -44,6 +52,16 @@ Posts
                <td>{{ post.dateCreation|date:'d M Y' }}</td>
                <td>{{ post.text|truncatewords:20 }}</td>
                <td>{{ post.categoryType }}</td>
+
+                <td>
+                    {# А здесь доступ для каждой ссылки теперь будем проверять отдельно #}
+                    {% if perms.news.change_post %}
+                    <a href="{% url 'post_edit' pk=post.id %}">Изменить</a>
+                    {% endif %}
+                    {% if perms.news.delete_post %}
+                    <a href="{% url 'post_list' post.id %}">Удалить</a>
+                    {% endif %}
+                </td>
 
            </tr>
            {% endfor %}
