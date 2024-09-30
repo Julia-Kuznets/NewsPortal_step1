@@ -67,8 +67,13 @@ EMAIL_USE_SSL = True
 
 DEFAULT_FROM_EMAIL = "white.evil77@yandex.ru"
 
-
-
+SERVER_EMAIL = "white.evil77@yandex.ru"
+MANAGERS = (
+    ('Romjey', 'rommyjey@mail.ru'),
+)
+ADMINS = (
+    ('julia', 'julia2238812@gmail.com'),
+)
 
 
 
