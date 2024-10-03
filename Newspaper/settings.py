@@ -54,7 +54,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_FORMS = {"signup": "accounts.forms.CustomSignupForm"}
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -72,7 +72,7 @@ MANAGERS = (
     ('Romjey', 'rommyjey@mail.ru'),
 )
 ADMINS = (
-    ('julia', 'julia2238812@gmail.com'),
+    ('julia', '2238812@mail.ru'),
 )
 
 
