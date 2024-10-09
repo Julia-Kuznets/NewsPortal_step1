@@ -39,6 +39,7 @@ class Post(models.Model):
     title = models.CharField(max_length=128)
     text = models.TextField()
     rating = models.SmallIntegerField(default=0)
+    subscribers = models.ManyToManyField(User, related_name='post_subscriptions')
 
     def like(self):
         self.rating += 1
