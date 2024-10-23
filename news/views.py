@@ -13,7 +13,9 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Exists, OuterRef
 from django.views.decorators.csrf import csrf_protect
 
-
+from django.http import HttpResponse
+from django.views import View
+from .tasks import hello
 
 class PostsList(ListView):
     # Указываем модель, объекты которой мы будем выводить
@@ -162,3 +164,9 @@ def subscriptions(request):
         'subscriptions.html',
         {'categories': categories_with_subscriptions},
     )
+
+
+class IndexView(View):
+    def get(self, request):
+        hello.delay()
+        return HttpResponse('Hello!')
